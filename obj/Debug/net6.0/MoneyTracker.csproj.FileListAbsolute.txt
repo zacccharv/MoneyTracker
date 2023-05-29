@@ -1,0 +1,15 @@
+D:\c# projects\MoneyTracker\bin\Debug\net6.0\MoneyTracker.exe
+D:\c# projects\MoneyTracker\bin\Debug\net6.0\MoneyTracker.deps.json
+D:\c# projects\MoneyTracker\bin\Debug\net6.0\MoneyTracker.runtimeconfig.json
+D:\c# projects\MoneyTracker\bin\Debug\net6.0\MoneyTracker.dll
+D:\c# projects\MoneyTracker\bin\Debug\net6.0\MoneyTracker.pdb
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\MoneyTracker.csproj.AssemblyReference.cache
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\MoneyTracker.GeneratedMSBuildEditorConfig.editorconfig
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\MoneyTracker.AssemblyInfoInputs.cache
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\MoneyTracker.AssemblyInfo.cs
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\MoneyTracker.csproj.CoreCompileInputs.cache
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\MoneyTracker.dll
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\refint\MoneyTracker.dll
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\MoneyTracker.pdb
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\MoneyTracker.genruntimeconfig.cache
+D:\c# projects\MoneyTracker\obj\Debug\net6.0\ref\MoneyTracker.dll
