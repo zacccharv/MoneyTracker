@@ -1,20 +1,16 @@
 {
-  "Items": [
-    {
-      "Name": "BankAccount",
-      "Entries": [
-        888,
-        999
-      ],
-      "Amount": 1887
-    },
-    {
-      "Name": "CreditCard",
-      "Entries": [
-        200
-      ],
-      "Amount": 200
-    }
-  ],
-  "TotalMoney": 2087
+	"BankAccount": {
+		"MonthlyIncome": 1001,
+		"StartDate": "2023-05-30T00:00:00-04:00",
+		"Name": "Bank Account",
+		"Entries": [1008, 1, 1, -7],
+		"Amount": 1003
+	},
+	"CreditCard": {
+		"StartDate": "2023-05-30T00:00:00-04:00",
+		"Name": "",
+		"Entries": [],
+		"Amount": 0
+	},
+	"TotalMoney": 0
 }

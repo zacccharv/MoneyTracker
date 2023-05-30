@@ -4,11 +4,13 @@ namespace MoneyTracker;
 
 public class AppData
 {
-    public List<LineItemBase> Items { get; set; }
+    public BankAccount BankAccount { get; set; }
+    public CreditCard CreditCard { get; set; }
     public int TotalMoney { get; set; }
     public AppData()
     {
-        Items = new List<LineItemBase>{new BankAccount(), new CreditCard()};
+        BankAccount = new BankAccount();
+        CreditCard = new CreditCard();
         TotalMoney = 0;
     }
 

@@ -4,63 +4,109 @@ using MoneyTracker.WriteSystem;
 namespace MoneyTracker;
 class Program
 {
-    private static string? _path;
-
     static void Main(string[] args)
     {
-        _path = $@"{Directory.GetCurrentDirectory()}\Data\Database\MoneyData.json";
-        if (!File.Exists(_path))
-        {
-            File.Create(_path);
-        }
-        
         AppData _appData = SaveLoadSystem.LoadData(new AppData());
-        Console.WriteLine("Choose account to acces: [1] Bank Account, [2] Credit Card...");
+        _appData.BankAccount.AddMonthlyIncome();
 
-        _appData = BankSelecter(_appData);
+        ConsoleTxt.WriteColor("What would you like to do: [1] Set monthly income, [2] Set credit limit, [3] Add Transaction to Account... ", 
+            ("{[1]}", ConsoleColor.DarkYellow), 
+            ("{[2]}", ConsoleColor.DarkYellow),
+            ("{[3]}", ConsoleColor.DarkYellow));
 
-        Console.WriteLine($"Your new account totals: Bank Account, Credit Card{_appData.Items[0].Amount} + Credit Card {_appData.Items[1].Amount}.");
+        int _selection = 0;
 
-        _appData.TotalMoney = _appData.Items[0].Amount + _appData.Items[1].Amount;
+        _selection = SelectionInput(2);
+
+        if (_selection == 1)
+        {
+            Console.WriteLine("Set Amount: ");
+
+            string? strNum = ConsoleTxt.ReadInput();
+            int.TryParse(strNum, out _selection);
+
+            _appData.BankAccount.SetMonthlyIncome(_selection);
+
+            SaveLoadSystem.SaveData(_appData);
+
+            Environment.Exit(0);
+        }
+        if (_selection == 2)
+        {
+            Console.WriteLine("Set Amount: ");
+
+            string? strNum = ConsoleTxt.ReadInput();
+            int.TryParse(strNum, out _selection);
+
+            _appData.CreditCard.SetCreditCap(_selection);
+
+            SaveLoadSystem.SaveData(_appData);
+
+            Environment.Exit(0);
+        }
+
+        ConsoleTxt.WriteColor("Choose account to acces: [1] Bank Account, [2] Credit Card...", 
+            ("{[1]}", ConsoleColor.DarkYellow), 
+            ("{[2]}", ConsoleColor.DarkYellow));
+
+        _selection = SelectionInput(2);
+        _appData = EntryAdder(_appData, _selection);
+
+        Console.WriteLine($"Your new account totals: Bank Account, Credit Card{_appData.BankAccount.Amount} + Credit Card {_appData.CreditCard.Amount}.");
+
+        _appData.TotalMoney = _appData.BankAccount.Amount + _appData.CreditCard.Amount;
         Console.WriteLine($"Total Money Available: {_appData.TotalMoney}");
 
         SaveLoadSystem.SaveData(_appData);
     }
 
-    private static AppData BankSelecter(AppData appData)
-    {        
-        string? _selectedAccount = Console.ReadLine();
+    private static AppData EntryAdder(AppData appData, int account)
+    {
+        Console.WriteLine("Amount:");
 
-        if (_selectedAccount != "1" && _selectedAccount != "2")
+        string? strNum = ConsoleTxt.ReadInput();
+
+        int num = 0;
+        int.TryParse(strNum, out num);
+
+        if (account == 1)
         {
-            Console.WriteLine("Please select a bank account");
-            
-            BankSelecter(appData);
+            appData.BankAccount.AddEntry(num);
         }
-
-        if (_selectedAccount == "1")
+        else if (account == 2)
         {
-            Console.WriteLine("Amount:");
-            string? strNum = Console.ReadLine();
-
-            int num = 0;
-            int.TryParse(strNum, out num);
-
-            appData.Items[0].AddEntry(num);
-            return appData;
+            appData.CreditCard.AddCreditEntry(num);
         }
-        else if (_selectedAccount == "2")
-        {
-            Console.WriteLine("Amount:");
-            string? strNum = Console.ReadLine() as string;
-
-            int num = 0;
-            int.TryParse(strNum, out num);
-
-            appData.Items[1].AddEntry(num);
-            return appData;
-        }
-
-        return new AppData();
+        return appData;
     }
+
+    private static int SelectionInput(int numberOfOptions)
+    {
+        string? _selectAccount = ConsoleTxt.ReadInput();
+
+        int _selectedAccount = 0;
+        int.TryParse(_selectAccount, out _selectedAccount);
+
+        bool inRangeCheck()
+        {
+            if (_selectedAccount > numberOfOptions || _selectedAccount < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        if (!inRangeCheck())
+        {
+            ConsoleTxt.ErrorMessage("Invalid choice, pick again...");
+
+            SelectionInput(numberOfOptions);
+        }
+
+        return _selectedAccount;
+    }
+
 }
