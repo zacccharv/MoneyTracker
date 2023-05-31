@@ -22,7 +22,6 @@ public static class SaveLoadSystem
         if (File.ReadAllText(_path).Count() < 5)
         {
             string jsonString = JsonSerializer.Serialize(appData, jsonOptions);
-            Console.WriteLine(jsonString);
             File.WriteAllText(_path, jsonString);
             return appData;
         }
