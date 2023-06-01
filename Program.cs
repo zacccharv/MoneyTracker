@@ -1,13 +1,16 @@
 ﻿using System.Text.Json;
+using MoneyTracker.Managers;
 using MoneyTracker.WriteSystem;
+
+using static MoneyTracker.Managers.AppDataManager;
 
 namespace MoneyTracker;
 class Program
 {
     static void Main(string[] args)
     {
-        AppData _appData = SaveLoadSystem.LoadData(new AppData());
-        _appData.BankAccount.AddMonthlyIncome();
+        LoadData();
+        appData.BankAccount.AddMonthlyIncome();
 
         ConsoleTxt.WriteColor("What would you like to do: [1] Set monthly income, [2] Set credit limit, [3] Add Transaction to Account... ", 
             ("{[1]}", ConsoleColor.DarkYellow), 
@@ -16,31 +19,31 @@ class Program
 
         int _selection = 0;
 
-        _selection = SelectionInput(2);
+        _selection = SelectionInput(3);
 
         if (_selection == 1)
         {
-            Console.WriteLine("Set Amount: ");
+            Console.Write("Set Amount: ");
 
             string? strNum = ConsoleTxt.ReadInput();
             int.TryParse(strNum, out _selection);
 
-            _appData.BankAccount.SetMonthlyIncome(_selection);
+            appData.BankAccount.SetMonthlyIncome(_selection);
 
-            SaveLoadSystem.SaveData(_appData);
+            SaveLoadSystem.SaveData(appData);
 
             Environment.Exit(0);
         }
         if (_selection == 2)
         {
-            Console.WriteLine("Set Amount: ");
+            Console.Write("Set Amount: ");
 
             string? strNum = ConsoleTxt.ReadInput();
             int.TryParse(strNum, out _selection);
 
-            _appData.CreditCard.SetCreditCap(_selection);
+            appData.CreditCard.SetCreditCap(_selection);
 
-            SaveLoadSystem.SaveData(_appData);
+            SaveData(appData);
 
             Environment.Exit(0);
         }
@@ -50,32 +53,25 @@ class Program
             ("{[2]}", ConsoleColor.DarkYellow));
 
         _selection = SelectionInput(2);
-        _appData = EntryAdder(_appData, _selection);
+        appData = EntryAdder(appData, _selection);
 
-        Console.WriteLine($"Your new account totals: Bank Account, Credit Card{_appData.BankAccount.Amount} + Credit Card {_appData.CreditCard.Amount}.");
+        Console.WriteLine($"Your new account totals: Bank Account, Credit Card{appData.BankAccount.Amount} + Credit Card {appData.CreditCard.Amount}.");
 
-        _appData.TotalMoney = _appData.BankAccount.Amount + _appData.CreditCard.Amount;
-        Console.WriteLine($"Total Money Available: {_appData.TotalMoney}");
+        appData.TotalMoney = appData.BankAccount.Amount - appData.CreditCard.Amount;
+        Console.WriteLine($"Total Money Available: {appData.TotalMoney}");
 
-        SaveLoadSystem.SaveData(_appData);
+        SaveData(appData);
     }
-
     private static AppData EntryAdder(AppData appData, int account)
     {
-        Console.WriteLine("Amount:");
-
-        string? strNum = ConsoleTxt.ReadInput();
-
-        int num = 0;
-        int.TryParse(strNum, out num);
 
         if (account == 1)
         {
-            appData.BankAccount.AddEntry(num);
+            appData.BankAccount.AddEntry();
         }
         else if (account == 2)
         {
-            appData.CreditCard.AddCreditEntry(num);
+            appData.CreditCard.AddCreditEntry();
         }
         return appData;
     }

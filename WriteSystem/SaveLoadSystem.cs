@@ -1,4 +1,5 @@
 using System.Text.Json;
+using MoneyTracker.Managers;
 
 namespace MoneyTracker.WriteSystem;
 
@@ -10,8 +11,10 @@ public static class SaveLoadSystem
     {
         jsonOptions.WriteIndented = true;
     }
-    public static AppData LoadData(AppData appData)
+    public static AppData LoadData()
     {
+        AppData appData = new AppData();
+        
         if (!File.Exists(_path))
         {
             File.Create(_path);
@@ -40,7 +43,8 @@ public static class SaveLoadSystem
     }
     public static void SaveData(AppData data)
     {
-        string jsonString = JsonSerializer.Serialize(data, jsonOptions);
+        AppDataManager.appData = data;
+        string jsonString = JsonSerializer.Serialize(AppDataManager.appData, jsonOptions);
         
         if (File.Exists(_path))
         {

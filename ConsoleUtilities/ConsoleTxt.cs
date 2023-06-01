@@ -36,7 +36,7 @@ public static class ConsoleTxt
     public static void ErrorMessage(string errorMessage)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(errorMessage);
+        Console.Write(errorMessage);
         Console.ResetColor();
     }    
 }

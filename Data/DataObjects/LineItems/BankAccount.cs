@@ -9,10 +9,12 @@ public class BankAccount : LineItemBase
     }
     public void AddMonthlyIncome()
     {
-        bool canRenew = StartDate.Month < DateTime.Today.Month || (StartDate.Month > DateTime.Today.Month && StartDate.Year < DateTime.Today.Year);
+        bool canRenew = StartDate.Month < DateTime.Today.Month 
+        || (StartDate.Month > DateTime.Today.Month && StartDate.Year < DateTime.Today.Year);
+
         if (canRenew)
         {
-            AddEntry(MonthlyIncome);
+            Entries.Add("Income", MonthlyIncome);
         }
     }
     public void SetMonthlyIncome(int amount)

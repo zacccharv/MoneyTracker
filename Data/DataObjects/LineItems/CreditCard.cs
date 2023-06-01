@@ -7,14 +7,19 @@ public class CreditCard : LineItemBase
     {
         CreditCap = creditCap;
     }
-    public void AddCreditEntry(int amount)
+    public void AddCreditEntry()
     {
-        if (Amount + amount > CreditCap)
+        (string name, int amount) entry = SetEntryName();
+
+        entry = SetEntryAmount(entry);
+
+        if (Amount + entry.amount > CreditCap)
         {
             ConsoleTxt.ErrorMessage("Amount exceeds limit");
             Environment.Exit(0);
         }
 
-        AddEntry(amount);
+        Entries.Add(entry.name, entry.amount);
+        Amount += entry.amount;
     }
 }
