@@ -56,6 +56,7 @@ class Program
                 ("{[1]}", ConsoleColor.DarkYellow), 
                 ("{[2]}", ConsoleColor.DarkYellow));
     
+            // coroutine this
             _selection = SelectionInput(2);
             AppDataManager.EntryAdder(_selection);
             AppDataManager.SetTotalMoney();
