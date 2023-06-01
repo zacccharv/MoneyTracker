@@ -2,15 +2,13 @@
 using MoneyTracker.Managers;
 using MoneyTracker.WriteSystem;
 
-using static MoneyTracker.Managers.AppDataManager;
-
 namespace MoneyTracker;
 class Program
 {
     static void Main(string[] args)
     {
-        LoadData();
-        appData.BankAccount.AddMonthlyIncome();
+        AppDataManager.LoadData();
+        AppDataManager.appData.BankAccount.AddMonthlyIncome();
 
         // change it to "access Bank, Credit, or Subscription"
         // Bank -Set Monthly Income -Add Transaction
@@ -32,9 +30,9 @@ class Program
             string? strNum = ConsoleTxt.ReadInput();
             int.TryParse(strNum, out _selection);
 
-            appData.BankAccount.SetMonthlyIncome(_selection);
+            AppDataManager.appData.BankAccount.SetMonthlyIncome(_selection);
 
-            SaveLoadSystem.SaveData(appData);
+            SaveLoadSystem.SaveData(AppDataManager.appData);
 
             Environment.Exit(0);
         }
@@ -45,39 +43,38 @@ class Program
             string? strNum = ConsoleTxt.ReadInput();
             int.TryParse(strNum, out _selection);
 
-            appData.CreditCard.SetCreditCap(_selection);
+            AppDataManager.appData.CreditCard.SetCreditCap(_selection);
 
-            SaveData(appData);
+            AppDataManager.SaveData(AppDataManager.appData);
 
             Environment.Exit(0);
         }
-
-        ConsoleTxt.WriteColor("Choose account to acces: [1] Bank Account, [2] Credit Card...", 
-            ("{[1]}", ConsoleColor.DarkYellow), 
-            ("{[2]}", ConsoleColor.DarkYellow));
-
-        _selection = SelectionInput(2);
-        appData = EntryAdder(appData, _selection);
-
-        Console.WriteLine($"Your new account totals: Bank Account, Credit Card{appData.BankAccount.Amount} + Credit Card {appData.CreditCard.Amount}.");
-
-        appData.TotalMoney = appData.BankAccount.Amount - appData.CreditCard.Amount;
-        Console.WriteLine($"Total Money Available: {appData.TotalMoney}");
-
-        SaveData(appData);
+        if (_selection == 3)
+        {
+            ConsoleTxt.WriteColor("Choose account to acces: [1] Bank Account, [2] Credit Card...", 
+                ("{[1]}", ConsoleColor.DarkYellow), 
+                ("{[2]}", ConsoleColor.DarkYellow));
+    
+            _selection = SelectionInput(2);
+            EntryAdder(_selection);
+    
+            Console.WriteLine($"Your new account totals: Bank Account, Credit Card{AppDataManager.appData.BankAccount.Amount} + Credit Card {AppDataManager.appData.CreditCard.Amount}.");
+    
+            Console.WriteLine($"Total Money Available: {AppDataManager.appData.TotalMoney}");
+    
+            AppDataManager.SaveData(AppDataManager.appData);
+        }
     }
-    private static AppData EntryAdder(AppData appData, int account)
+    private static void EntryAdder( int account)
     {
-
         if (account == 1)
         {
-            appData.BankAccount.AddEntry();
+            AppDataManager.appData.BankAccount.AddEntry();
         }
         else if (account == 2)
         {
-            appData.CreditCard.AddCreditEntry();
+            AppDataManager.appData.CreditCard.AddCreditEntry();
         }
-        return appData;
     }
 
     private static int SelectionInput(int numberOfOptions)

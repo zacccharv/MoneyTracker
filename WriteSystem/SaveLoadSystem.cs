@@ -5,8 +5,10 @@ namespace MoneyTracker.WriteSystem;
 
 public static class SaveLoadSystem
 {
+    public static event System.Action? onSaved, onLoaded;
     static string _path = $@"{Directory.GetCurrentDirectory()}\Data\Database\MoneyData.json";
     static JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
+
     static SaveLoadSystem()
     {
         jsonOptions.WriteIndented = true;
@@ -26,7 +28,8 @@ public static class SaveLoadSystem
         {
             string jsonString = JsonSerializer.Serialize(appData, jsonOptions);
             File.WriteAllText(_path, jsonString);
-            return appData;
+
+            return appData;        
         }
         
         string jsonDeserializeStr = File.ReadAllText(_path);
@@ -42,6 +45,8 @@ public static class SaveLoadSystem
     }
     public static void SaveData(AppData data)
     {
+        onSaved?.Invoke();
+
         AppDataManager.appData = data;
         string jsonString = JsonSerializer.Serialize(AppDataManager.appData, jsonOptions);
         
@@ -55,5 +60,9 @@ public static class SaveLoadSystem
             File.Create(_path);
             File.WriteAllText(_path, jsonString);
         }
+    }
+    public static void TriggeronLoaded()
+    {
+        onLoaded?.Invoke();
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zacch\\c# projects\\MoneyTracker\\MoneyTracker.csproj": {}
+    "D:\\c# projects\\MoneyTracker\\MoneyTracker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zacch\\c# projects\\MoneyTracker\\MoneyTracker.csproj": {
+    "D:\\c# projects\\MoneyTracker\\MoneyTracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zacch\\c# projects\\MoneyTracker\\MoneyTracker.csproj",
+        "projectUniqueName": "D:\\c# projects\\MoneyTracker\\MoneyTracker.csproj",
         "projectName": "MoneyTracker",
-        "projectPath": "C:\\Users\\zacch\\c# projects\\MoneyTracker\\MoneyTracker.csproj",
+        "projectPath": "D:\\c# projects\\MoneyTracker\\MoneyTracker.csproj",
         "packagesPath": "C:\\Users\\zacch\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zacch\\c# projects\\MoneyTracker\\obj\\",
+        "outputPath": "D:\\c# projects\\MoneyTracker\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
