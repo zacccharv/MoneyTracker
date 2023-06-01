@@ -1,17 +1,17 @@
 {
-  "BankAccount": {
-    "MonthlyIncome": 1000,
-    "StartDate": "2023-05-31T00:00:00-04:00",
-    "Name": "Bank Account",
-    "Entries": {},
-    "Amount": 0
-  },
-  "CreditCard": {
-    "CreditCap": 200,
-    "StartDate": "2023-05-31T00:00:00-04:00",
-    "Name": "",
-    "Entries": {},
-    "Amount": 0
-  },
-  "TotalMoney": 0
+	"BankAccount": {
+		"MonthlyIncome": 1000,
+		"StartDate": "2023-05-31T00:00:00-04:00",
+		"Name": "Bank Account",
+		"Entries": {},
+		"Amount": 0
+	},
+	"CreditCard": {
+		"CreditCap": 200,
+		"StartDate": "2023-05-31T00:00:00-04:00",
+		"Name": "",
+		"Entries": {},
+		"Amount": 0
+	},
+	"TotalMoney": 0
 }

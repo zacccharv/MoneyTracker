@@ -7,6 +7,17 @@ public class BankAccount : LineItemBase
     {
         Name = "Bank Account";
     }
+
+    // public void Withdrawal(int amount)
+    // {
+    //     AddEntry(-amount);
+    // }
+
+    // public void Deposit(int amount)
+    // {
+    //     AddEntry(amount);
+    // }
+
     public void AddMonthlyIncome()
     {
         bool canRenew = StartDate.Month < DateTime.Today.Month 
@@ -20,5 +31,6 @@ public class BankAccount : LineItemBase
     public void SetMonthlyIncome(int amount)
     {
         MonthlyIncome = amount;
+        Amount = amount;
     }
 }

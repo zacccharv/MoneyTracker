@@ -12,7 +12,11 @@ class Program
         LoadData();
         appData.BankAccount.AddMonthlyIncome();
 
-        ConsoleTxt.WriteColor("What would you like to do: [1] Set monthly income, [2] Set credit limit, [3] Add Transaction to Account... ", 
+        // change it to "access Bank, Credit, or Subscription"
+        // Bank -Set Monthly Income -Add Transaction
+        // Credit -Set Limit -add transaction
+        // Subscription -add item
+        ConsoleTxt.WriteColor("What would you like to do: [1] Set monthly income, [2] Set credit limit, [3] Add Transaction to Accounts... ", 
             ("{[1]}", ConsoleColor.DarkYellow), 
             ("{[2]}", ConsoleColor.DarkYellow),
             ("{[3]}", ConsoleColor.DarkYellow));

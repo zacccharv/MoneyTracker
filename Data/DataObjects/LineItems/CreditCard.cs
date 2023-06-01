@@ -3,6 +3,10 @@ namespace MoneyTracker.Data.LineItems;
 public class CreditCard : LineItemBase
 {
     public int CreditCap { get; set; } = 0;
+    public CreditCard()
+    {
+        Name = "Credit Card";
+    }
     public void SetCreditCap(int creditCap)
     {
         CreditCap = creditCap;
