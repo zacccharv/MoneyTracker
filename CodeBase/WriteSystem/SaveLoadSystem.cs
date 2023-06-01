@@ -6,7 +6,7 @@ namespace MoneyTracker.WriteSystem;
 public static class SaveLoadSystem
 {
     public static event System.Action? onSaved, onLoaded;
-    static string _path = $@"{Directory.GetCurrentDirectory()}\Data\Database\MoneyData.json";
+    static string _path = $@"{Directory.GetCurrentDirectory()}\CodeBase\Data\Database\MoneyData.json";
     static JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
 
     static SaveLoadSystem()
