@@ -1,0 +1,28 @@
+{
+	"DuplicateNum": 0,
+	"BankAccount": {
+		"MonthlyIncome": 1001,
+		"StartDate": "2023-05-31T00:00:00-04:00",
+		"Name": "Bank Account",
+		"Entries": {
+			"gg": 864,
+			"Monthly Credit Total": 0,
+			"Monthly Income": 0
+		},
+		"Amount": 2818
+	},
+	"CreditCard": {
+		"CreditCap": 0,
+		"StartDate": "2023-05-31T00:00:00-04:00",
+		"Name": "Credit Card",
+		"Entries": {},
+		"Amount": 0
+	},
+	"MonthlyExpenses": {
+		"StartDate": "2023-06-01T00:00:00-04:00",
+		"Name": "Monthly Expenses",
+		"Entries": {},
+		"Amount": 0
+	},
+	"TotalMoney": 2818
+}

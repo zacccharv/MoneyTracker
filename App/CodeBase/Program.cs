@@ -8,7 +8,6 @@ class Program
     static void Main(string[] args)
     {
         AppDataManager.LoadData();
-        AppDataManager.appData.BankAccount.AddMonthlyIncome();
 
         // change it to "access Bank, Credit, or Subscription"
         // Bank -Set Monthly Income -Add Transaction
@@ -25,12 +24,13 @@ class Program
 
         if (_selection == 1)
         {
-            Console.Write("Set Amount: ");
+            Console.Write("Set Amount> ");
 
             string? strNum = ConsoleTxt.ReadInput();
             int.TryParse(strNum, out _selection);
 
             AppDataManager.appData.BankAccount.SetMonthlyIncome(_selection);
+            AppDataManager.SetTotalMoney();
 
             SaveLoadSystem.SaveData(AppDataManager.appData);
 
@@ -38,12 +38,13 @@ class Program
         }
         if (_selection == 2)
         {
-            Console.Write("Set Amount: ");
+            Console.Write("Set Amount> ");
 
             string? strNum = ConsoleTxt.ReadInput();
             int.TryParse(strNum, out _selection);
 
             AppDataManager.appData.CreditCard.SetCreditCap(_selection);
+            AppDataManager.SetTotalMoney();
 
             AppDataManager.SaveData(AppDataManager.appData);
 
@@ -56,7 +57,8 @@ class Program
                 ("{[2]}", ConsoleColor.DarkYellow));
     
             _selection = SelectionInput(2);
-            EntryAdder(_selection);
+            AppDataManager.EntryAdder(_selection);
+            AppDataManager.SetTotalMoney();
     
             Console.WriteLine($"Your new account totals: Bank Account, Credit Card{AppDataManager.appData.BankAccount.Amount} + Credit Card {AppDataManager.appData.CreditCard.Amount}.");
     
@@ -65,20 +67,12 @@ class Program
             AppDataManager.SaveData(AppDataManager.appData);
         }
     }
-    private static void EntryAdder( int account)
-    {
-        if (account == 1)
-        {
-            AppDataManager.appData.BankAccount.AddEntry();
-        }
-        else if (account == 2)
-        {
-            AppDataManager.appData.CreditCard.AddCreditEntry();
-        }
-    }
 
     private static int SelectionInput(int numberOfOptions)
     {
+        Console.WriteLine("");
+        Console.Write("Enter Number> ");
+
         string? _selectAccount = ConsoleTxt.ReadInput();
 
         int _selectedAccount = 0;
