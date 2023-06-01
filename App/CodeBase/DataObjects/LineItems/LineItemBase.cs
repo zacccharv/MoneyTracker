@@ -1,6 +1,6 @@
-using MoneyTracker.Managers;
+using MoneyTracker.DataObjectsUtilities;
 
-namespace MoneyTracker.Data.LineItems;
+namespace MoneyTracker.DataObjects.LineItems;
 
 public class LineItemBase
 {
@@ -22,7 +22,7 @@ public class LineItemBase
 
     public void AddEntry()
     {
-        Console.WriteLine("Enter Name> ");
+        Console.Write("Enter Name> ");
 
         string? strName = ConsoleTxt.ReadInput();
         string name = strName == null ? "" : strName;
@@ -34,7 +34,7 @@ public class LineItemBase
         }
 
 
-        Console.WriteLine("Enter Amount> ");
+        Console.Write("Enter Amount> ");
 
         string? strNum = ConsoleTxt.ReadInput();
 
@@ -51,7 +51,7 @@ public class LineItemBase
             if (Entries.ContainsKey(name))
             {
                 (string , int) entry = (name, num);
-                entry = DuplicateKeyNamer(entry);
+                entry = DataUtils.DuplicateKeyNamer(entry);
                 Entries.Add(entry.Item1 , entry.Item2);
             }
             else
@@ -66,7 +66,7 @@ public class LineItemBase
     {
         if (Entries.ContainsKey(entry.name))
         {
-            (string , int) newEntry = DuplicateKeyNamer(entry);
+            (string , int) newEntry = DataUtils.DuplicateKeyNamer(entry);
 
             Entries.Add(newEntry.Item1, entry.amount);
         }
@@ -75,14 +75,6 @@ public class LineItemBase
             Entries.Add(entry.name, entry.amount);
         }
         Amount += entry.amount;
-    }
-
-    private (string name, int amount) DuplicateKeyNamer((string name, int amount) entry)
-    {
-        AppDataManager.appData.DuplicateNum++;
-        entry.name += $"{AppDataManager.appData.DuplicateNum}";
-
-        return entry;
     }
 
     public (string name, int amount) SetEntryName()

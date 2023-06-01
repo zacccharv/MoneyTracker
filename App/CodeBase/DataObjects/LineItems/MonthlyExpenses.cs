@@ -1,4 +1,4 @@
-namespace MoneyTracker.Data.LineItems;
+namespace MoneyTracker.DataObjects.LineItems;
 
 public class MonthlyExpenses : LineItemBase
 {

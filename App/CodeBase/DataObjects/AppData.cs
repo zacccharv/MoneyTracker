@@ -1,4 +1,4 @@
-using MoneyTracker.Data.LineItems;
+using MoneyTracker.DataObjects.LineItems;
 
 namespace MoneyTracker;
 
