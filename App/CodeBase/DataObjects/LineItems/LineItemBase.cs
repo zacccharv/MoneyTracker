@@ -14,12 +14,6 @@ public class LineItemBase
         StartDate = DateTime.Today;
     }
 
-    public LineItemBase(string name)
-    {
-        StartDate = DateTime.Today;
-        Name = name;
-    }
-
     public void AddEntry()
     {
         Console.Write("Enter Name> ");
@@ -32,7 +26,6 @@ public class LineItemBase
             ConsoleTxt.ErrorMessage("Please enter a descriptor!");
             AddEntry();
         }
-
 
         Console.Write("Enter Amount> ");
 
@@ -47,33 +40,21 @@ public class LineItemBase
             AddEntry();
         }
         else
-        {        
-            if (Entries.ContainsKey(name))
-            {
-                (string , int) entry = (name, num);
-                entry = DataUtils.DuplicateKeyNamer(entry);
-                Entries.Add(entry.Item1 , entry.Item2);
-            }
-            else
-            {
-                Entries.Add(name , num);
-            }
+        {
+            (string name, int amount) entry = (name, num);
+            entry = DataUtils.DuplicateKeyChecker(entry, Entries);
+
+            Entries.Add(entry.name, entry.amount);
             Amount += num;
+
             Console.WriteLine($"Your new {Name} total is {Amount}");
         }
     }
     public void AddEntry((string name, int amount) entry)
     {
-        if (Entries.ContainsKey(entry.name))
-        {
-            (string , int) newEntry = DataUtils.DuplicateKeyNamer(entry);
+        entry = DataUtils.DuplicateKeyChecker(entry, Entries);
+        Entries.Add(entry.name, entry.amount);
 
-            Entries.Add(newEntry.Item1, entry.amount);
-        }
-        else
-        {
-            Entries.Add(entry.name, entry.amount);
-        }
         Amount += entry.amount;
     }
 

@@ -1,13 +1,23 @@
-using MoneyTracker.Managers;
-
 namespace MoneyTracker.DataObjectsUtilities;
 
 public static class DataUtils
 {
-    public static (string name, int amount) DuplicateKeyNamer((string name, int amount) entry)
+    public static (string name, int amount) DuplicateKeyChecker((string name, int amount) entry, SortedList<string, int> Entries)
     {
-        AppDataManager.appData.DuplicateNum++;
-        entry.name += $"{AppDataManager.appData.DuplicateNum}";
+        if (Entries.ContainsKey(entry.name))
+        {
+            int count = 0;
+
+            foreach (var item in Entries)
+            {
+                if (item.Key == entry.name)
+                {
+                    count++;
+                }
+            }
+            entry.name += $"{count}";
+            return entry;
+        }
 
         return entry;
     }

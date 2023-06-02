@@ -1,3 +1,5 @@
+using MoneyTracker.DataObjectsUtilities;
+
 namespace MoneyTracker.DataObjects.LineItems;
 
 public class CreditCard : LineItemBase
@@ -28,7 +30,9 @@ public class CreditCard : LineItemBase
             Environment.Exit(0);
         }
 
+        (string , int) newEntry = DataUtils.DuplicateKeyChecker(entry, Entries);
         Entries.Add(entry.name, entry.amount);
+        
         Amount += entry.amount;
     }
 
