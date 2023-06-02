@@ -2,6 +2,8 @@ namespace MoneyTracker.DataObjects.LineItems;
 
 public class BankAccount : LineItemBase
 {
+    public bool NotNewMonth { get; set; } = false;
+
     public int MonthlyIncome { get; set; } = 0;
 
     public BankAccount() 
@@ -24,7 +26,6 @@ public class BankAccount : LineItemBase
     {
         AddEntry(entry);
     }
-
     public void Deposit(int amount)
     {
         (string name, int amount) entry = SetEntryName();
@@ -35,13 +36,15 @@ public class BankAccount : LineItemBase
 
     public void AddMonthlyIncome()
     {
-        bool canRenew = StartDate.Month < DateTime.Today.Month 
-        || (StartDate.Month > DateTime.Today.Month && StartDate.Year < DateTime.Today.Year);
-
-        if (canRenew)
-        {
+        bool canRenewDate = (StartDate.Day == DateTime.Today.Day && (StartDate.Month != DateTime.Today.Month || StartDate.Year != DateTime.Today.Year));
+        
+        if (canRenewDate && !NotNewMonth)
+        {        
+            NotNewMonth |= canRenewDate;            
             Entries.Add("Monthly Income", MonthlyIncome);
         }
+
+        NotNewMonth |= canRenewDate;
     }
     public void SetMonthlyIncome(int amount)
     {

@@ -6,7 +6,7 @@ public class CreditCard : LineItemBase
 {
     public delegate void creditToBankEventHandler((string name, int amount) resetEntry);
     public static creditToBankEventHandler? creditToBank;
-
+    public bool NotNewMonth { get; set; } = false;
     public int CreditCap { get; set; } = 0;
 
     public CreditCard()
@@ -27,7 +27,7 @@ public class CreditCard : LineItemBase
         if (Amount + entry.amount > CreditCap)
         {
             ConsoleTxt.ErrorMessage("Amount exceeds limit!");
-            Environment.Exit(0);
+            Program.Start();
         }
 
         (string , int) newEntry = DataUtils.DuplicateKeyChecker(entry, Entries);
@@ -38,8 +38,16 @@ public class CreditCard : LineItemBase
 
     public void AllCreditToBank()
     {
-        creditToBank?.Invoke(("Monthly Credit Total", Amount));
+        bool canRenewDate = (StartDate.Day == DateTime.Today.Day && (StartDate.Month != DateTime.Today.Month || StartDate.Year != DateTime.Today.Year));
+        
+        if (canRenewDate && !NotNewMonth)
+        {        
+            creditToBank?.Invoke(("Monthly Credit Total", Amount));
+            Amount = 0;
 
-        Amount = 0;
+            NotNewMonth |= canRenewDate;  
+        }
+
+        NotNewMonth |= canRenewDate;
     }
 }
